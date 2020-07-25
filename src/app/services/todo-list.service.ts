@@ -17,19 +17,20 @@ const defaultTodoList = [
   providedIn: 'root'
 })
 export class TodoListService {
-  todoList: TodoItem[];
+
+  private todoList: TodoItem[];
 
   constructor(private storageService: StorageService) {
     this.todoList =
       storageService.getData(todoListStorageKey) || defaultTodoList;
-   }
-
-  getTodoList() {
-    return this.todoList;
   }
 
   saveList() {
     this.storageService.setData(todoListStorageKey, this.todoList);
+  }
+
+  getTodoList() {
+    return this.todoList;
   }
 
   addItem(item: TodoItem) {
@@ -48,5 +49,5 @@ export class TodoListService {
     this.todoList.splice(index, 1);
     this.saveList();
   }
-
 }
+
